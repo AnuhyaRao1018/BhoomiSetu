@@ -1,0 +1,645 @@
+PROJECT: BHOOMISETU – COMPLETE FARMER PROCUREMENT SLOT BOOKING & LIVE QUEUE MANAGEMENT PLATFORM
+Build a fully functional, realistic, production-style web application called BhoomiSetu – Farmer Procurement Slot Booking & Queue Management Platform.
+
+Tagline: Connecting Farmers. Simplifying Procurement.
+
+Theme: Samriddh Annadata, Samriddh Bharat.
+
+I do NOT want a static landing page, simple UI mockup, or a website where buttons do nothing. I want a complete end-to-end working platform with a farmer portal, booking engine, live queue tracking, procurement centre dashboard, and administrator controls.
+
+Every feature must be functional and connected to the appropriate data. Use a real database and backend. Do not use localStorage as the primary database.
+
+1. DESIGN AND VISUAL IDENTITY
+Create a premium, modern, trustworthy agricultural technology platform.
+
+Use this colour palette:
+- Background: #F1EAD8
+- Secondary background: #D5C7AD
+- Primary sage: #8A8E75
+- Light sage: #BEC5A4
+- Dark olive/brown: #68604D
+Design requirements:
+- Clean, elegant, premium dashboard interface.
+- Professional typography with excellent readability.
+- Beautiful cards, rounded corners, subtle shadows and soft transitions.
+- Responsive design for mobile phones, tablets and desktops.
+- Farmer-friendly interface with large buttons and simple language.
+- Attractive charts, visual statistics, progress bars and status indicators.
+- Use agricultural illustrations, subtle field patterns, crop imagery and meaningful icons.
+- Avoid excessive gradients, cartoonish graphics and generic AI-generated dashboard layouts.
+- Use consistent spacing and a professional design system.
+- Provide loading states, empty states, success messages and error messages.
+The website should feel like a genuine government-supported agricultural technology platform.
+2. USER ROLES AND ACCESS
+Create three separate user roles:
+1. Farmer
+2. Procurement Centre Staff
+3. Administrator
+Each role must have its own dashboard and permissions.
+
+Implement:
+- Registration
+- Login and logout
+- Secure authentication
+- Password reset
+- Role-based access control
+- Protected dashboard routes
+- Session management
+Farmers must not be able to access staff or administrator controls.
+3. FARMER REGISTRATION
+Create a farmer registration page with these fields:
+- Full name
+- Mobile number
+- Village
+- Mandal
+- District
+- State
+- Farmer ID (optional)
+- Landholding details (optional)
+- Preferred language
+- Password
+- Confirm password
+Validate all fields.
+
+Requirements:
+- Mobile number must have valid formatting.
+- Prevent duplicate accounts using the same mobile number.
+- Display clear validation messages.
+- Allow login using mobile number and password.
+- Provide an easy-to-use registration interface.
+After successful registration, redirect the farmer to their personal dashboard.
+4. FARMER DASHBOARD
+Display a personalised welcome message:
+
+"Welcome, [Farmer Name]!"
+
+Show the following information:
+- Total bookings made
+- Upcoming bookings
+- Completed procurement visits
+- Cancelled bookings
+- Current active token
+- Next scheduled procurement slot
+- Current queue position (if applicable)
+Create prominent action cards:
+- Book a New Slot
+- My Bookings
+- Track My Queue
+- Procurement Centres
+- Booking History
+- Help & Support
+Display the farmer's latest booking activity and notifications.
+5. PROCUREMENT CENTRE DISCOVERY
+Create a page displaying available procurement centres.
+
+Each centre should show:
+- Centre name
+- Centre ID
+- Village and location
+- District
+- Address
+- Supported crops
+- Operating days
+- Opening and closing hours
+- Available slots
+- Total daily capacity
+- Current queue
+- Contact information
+- Centre status (Open / Closed / Temporarily Unavailable)
+Allow farmers to:
+- Search centres by village, mandal or district.
+- Filter by crop.
+- View available slots.
+- Select a centre before booking.
+Use realistic sample data for demonstration.
+6. SLOT BOOKING ENGINE – VERY IMPORTANT
+This is the most important feature.
+
+Create a complete slot booking system.
+
+Booking flow:
+
+STEP 1: Select procurement centre.
+
+STEP 2: Select crop type.
+
+STEP 3: Enter estimated quantity in kilograms or quintals.
+
+STEP 4: Select procurement date.
+
+STEP 5: Display all available time slots.
+
+STEP 6: Select one available slot.
+
+STEP 7: Confirm booking.
+
+STEP 8: Generate a unique booking ID and queue token.
+
+Example:
+
+Farmer: Ramesh Kumar
+Centre: Warangal Procurement Centre
+Crop: Paddy
+Date: 15 November 2026
+Time: 10:00 AM – 10:30 AM
+Token: BS-WGL-001
+Booking ID: BHOOMI-2026-0001
+
+IMPORTANT SLOT VALIDATION RULES:
+- Every time slot must have a predefined maximum capacity.
+- A slot must never exceed its capacity.
+- Once the slot reaches its maximum capacity, mark it as FULL.
+- If a farmer tries to book a completely full slot, immediately display:
+"Sorry! This slot is already booked and no more bookings are available. Please select another time slot."
+- Never allow duplicate bookings for the same farmer, centre and date where they conflict.
+- Prevent two simultaneous users from taking the final available booking position.
+- Recheck availability on the server immediately before confirming a booking.
+- Update available capacity immediately after successful booking.
+- If a booking is cancelled, release its capacity.
+- Do not count cancelled bookings as active bookings.
+- Use database transactions or equivalent concurrency-safe logic.
+Slot statuses:
+- AVAILABLE
+- FILLING FAST
+- FULL
+- CLOSED
+Show capacity visually, for example:
+
+10:00 AM – 10:30 AM
+8 / 10 slots booked
+2 slots remaining
+[Book Now]
+
+When all 10 slots are booked:
+
+10:00 AM – 10:30 AM
+10 / 10 slots booked
+FULL
+[Unavailable]
+
+Show a clear disclaimer whenever the farmer selects a full slot.
+7. BOOKING CONFIRMATION AND TOKEN GENERATION
+After a successful booking, generate:
+- Unique booking ID
+- Unique queue token
+- Farmer name
+- Centre name
+- Crop
+- Quantity
+- Date
+- Time slot
+- Booking confirmation status
+Create a beautiful digital booking confirmation card.
+
+Example:
+
+BHOOMISETU – BOOKING CONFIRMED
+
+Farmer: Ramesh Kumar
+Token: BS-WGL-001
+Centre: Warangal Procurement Centre
+Date: 15 November 2026
+Time: 10:00 AM – 10:30 AM
+Crop: Paddy
+Quantity: 25 quintals
+
+Status: BOOKED
+
+Include:
+- Download confirmation as PDF
+- Print confirmation
+- View booking details
+- Cancel booking (subject to cancellation rules)
+Never generate duplicate active tokens.
+8. LIVE QUEUE TRACKING SYSTEM
+Create a real-time queue tracking page.
+
+Farmers should be able to enter their booking ID or token number and view their current queue status.
+
+Display:
+- Token number
+- Number of farmers ahead
+- Current token being served
+- Estimated waiting time
+- Assigned procurement centre
+- Scheduled time
+- Queue progress
+- Last updated time
+Queue stages:
+1. BOOKED
+2. CHECKED IN
+3. WAITING IN QUEUE
+4. CALLED FOR PROCUREMENT
+5. PROCUREMENT IN PROGRESS
+6. QUALITY CHECK
+7. WEIGHMENT COMPLETED
+8. PROCUREMENT COMPLETED
+Also support:
+- CANCELLED
+- MISSED SLOT
+- DELAYED
+Use a beautiful visual queue progress tracker.
+
+Example:
+
+Your Token: BS-WGL-001
+
+Now Serving: BS-WGL-004
+Farmers Ahead: 3
+Estimated Waiting Time: 45 minutes
+
+Your Status: WAITING IN QUEUE
+
+The queue must update when staff changes a farmer's status.
+
+Use real-time database subscriptions or polling with sensible refresh intervals.
+
+Do not display fabricated queue updates as if they were real.
+9. PROCUREMENT STAFF DASHBOARD
+Create a separate professional staff dashboard.
+
+This dashboard must show live procurement centre operations.
+
+TOP STATISTICS:
+- Total slots booked today
+- Total farmers checked in
+- Farmers currently waiting
+- Farmers being served
+- Procurement completed today
+- Cancelled bookings
+- Missed appointments
+- Remaining available slots
+Display these statistics in attractive dashboard cards.
+
+Example:
+
+TODAY'S OPERATIONS
+
+Total Bookings: 120
+Completed: 48
+Waiting: 32
+Currently Processing: 8
+Cancelled: 5
+Remaining: 27
+
+All values must be calculated from actual database records, not hardcoded numbers.
+10. TIME-WISE BOOKING DASHBOARD
+Create a dedicated time-wise booking table.
+
+Example:
+
+| Time Slot | Total Capacity | Booked | Available | Status |
+| 09:00–09:30 | 10 | 10 | 0 | FULL |
+| 09:30–10:00 | 10 | 8 | 2 | FILLING FAST |
+| 10:00–10:30 | 10 | 4 | 6 | AVAILABLE |
+| 10:30–11:00 | 10 | 10 | 0 | FULL |
+
+Staff must be able to see exactly how many farmers booked each time slot.
+
+Allow filtering by:
+- Today
+- Tomorrow
+- Custom date
+- Procurement centre
+- Crop type
+- Booking status
+Clicking any time slot should open a detailed list of farmers booked for that slot.
+11. FARMER MANAGEMENT TABLE
+Create a complete farmer list for staff.
+
+Columns:
+- Serial number
+- Farmer name
+- Token number
+- Mobile number
+- Village
+- Crop
+- Quantity
+- Booking date
+- Scheduled time
+- Check-in status
+- Queue position
+- Procurement status
+Add:
+- Search by farmer name
+- Search by token number
+- Search by mobile number
+- Filter by date
+- Filter by crop
+- Filter by status
+- Sort by time
+- Pagination
+Clicking a farmer should open a detailed profile and booking history.
+12. LIVE QUEUE MANAGEMENT FOR STAFF
+Create a live queue management interface.
+
+Staff should be able to:
+- View all farmers scheduled for today.
+- Check in arriving farmers.
+- Call the next token.
+- Move farmers to procurement in progress.
+- Mark quality checks completed.
+- Mark weighment completed.
+- Mark procurement completed.
+- Mark farmers as missed appointments.
+- Cancel bookings with a reason.
+- Add operational remarks.
+Provide clear action buttons for every valid status transition.
+
+Whenever staff updates a farmer's status, the farmer's queue tracking page must update.
+
+Queue ordering must follow the scheduled slot and centre's queue rules.
+
+Do not let staff accidentally process the same token twice.
+13. DELAY AND ANNOUNCEMENT MANAGEMENT
+Add a delay management feature.
+
+Staff can announce:
+- Procurement delayed by 15 minutes.
+- Procurement delayed by 30 minutes.
+- Procurement delayed by 1 hour.
+- Centre temporarily closed.
+- Centre operations resumed.
+- Slot schedule changed.
+Display announcements on the farmer dashboard.
+
+Show clear notifications such as:
+
+"Your procurement centre is experiencing a 30-minute delay. Your updated estimated waiting time is 11:15 AM."
+
+Do not promise SMS or WhatsApp delivery unless an actual messaging provider is configured.
+14. ADMINISTRATOR DASHBOARD
+Create a powerful central administrator dashboard.
+
+Admin can:
+- Add procurement centres.
+- Edit procurement centre details.
+- Deactivate centres.
+- Add and remove staff accounts.
+- Assign staff to centres.
+- Manage supported crops.
+- Set daily slot capacities.
+- Create time slots.
+- Modify operating hours.
+- View all farmers.
+- View all bookings.
+- Monitor all centres.
+- View procurement statistics.
+- Download reports.
+Display overall platform statistics:
+- Registered farmers
+- Active procurement centres
+- Total bookings
+- Completed procurements
+- Pending procurements
+- Cancelled bookings
+- Average waiting time
+Include centre-wise and date-wise performance charts.
+15. ANALYTICS AND REPORTS
+Create interactive charts showing:
+- Bookings per day
+- Completed procurements per day
+- Hourly slot occupancy
+- Crop-wise procurement volume
+- Centre-wise farmer turnout
+- Cancellation rates
+- Average waiting time
+- Daily procurement quantity
+Allow CSV and PDF report downloads.
+
+All statistics must be calculated from database data.
+16. NOTIFICATION SYSTEM
+Create an in-app notification centre.
+
+Notify farmers about:
+- Booking confirmation
+- Upcoming procurement appointment
+- Slot changes
+- Queue updates
+- Delay announcements
+- Token called
+- Procurement completed
+- Booking cancellation
+Add unread notification counts.
+
+Allow notifications to be marked as read.
+
+Design the notification panel beautifully.
+
+SMS and WhatsApp integration should be optional and clearly marked as requiring provider credentials.
+17. MULTILINGUAL AND ACCESSIBILITY FEATURES
+Support:
+- English
+- Telugu
+- Hindi
+Add a language selector.
+
+Use simple, farmer-friendly wording.
+
+Design for:
+- First-time smartphone users.
+- Older farmers.
+- Users with limited digital literacy.
+- Mobile devices with smaller screens.
+Use large touch targets, clear labels, readable text and simple booking steps.
+
+Include an assisted booking mode for procurement centre staff to register bookings on behalf of farmers.
+18. DATABASE AND BACKEND
+Use a real backend and persistent database.
+
+Preferred stack:
+- Frontend: React + TypeScript
+- Styling: Tailwind CSS
+- Backend/database/authentication: Supabase
+- Database: PostgreSQL
+- Charts: Recharts or equivalent
+- Real-time updates: Supabase Realtime
+- PDF generation: appropriate PDF library
+Create proper database tables for:
+1. users
+2. farmer_profiles
+3. procurement_centres
+4. centre_staff
+5. crops
+6. time_slots
+7. bookings
+8. queue_entries
+9. notifications
+10. announcements
+11. procurement_records
+12. audit_logs
+Create relationships, indexes, validation constraints and appropriate Row Level Security policies.
+
+Never expose secret API keys in frontend code.
+
+If Supabase credentials are unavailable, build the complete interface and provide a clearly labelled demo mode. Do not pretend that the demo mode is cloud-connected.
+19. DEMONSTRATION DATA
+Seed the application with realistic fictional demonstration data.
+
+Include:
+- At least 20 fictional farmers.
+- At least 3 procurement centres.
+- Multiple crops.
+- Multiple dates.
+- Multiple time slots.
+- Booked, checked-in, waiting, processing, completed and cancelled records.
+Use fictional names and contact details.
+
+The staff dashboard should look populated when first opened.
+
+Clearly distinguish demonstration records from actual farmer records.
+20. TESTING AND VALIDATION
+Test the entire application from beginning to end.
+
+Verify:
+- Farmer registration works.
+- Login works.
+- Farmer can book a slot.
+- Full slots cannot be booked.
+- The full-slot warning appears correctly.
+- Slot capacity updates immediately.
+- Tokens are unique.
+- Duplicate bookings are prevented.
+- Staff can check in farmers.
+- Staff can update queue statuses.
+- Farmers can see queue updates.
+- Completed bookings update dashboard statistics.
+- Cancelled bookings release capacity.
+- Different users cannot access unauthorised dashboards.
+- Data remains available after refreshing or reopening the site.
+- Mobile layout works correctly.
+- Reports export correctly.
+Fix all errors before presenting the final application.
+21. FINAL DELIVERY REQUIREMENTS
+I want:
+1. A beautiful public landing page.
+2. A working farmer registration and login system.
+3. A complete farmer dashboard.
+4. A functional slot booking engine.
+5. Unique booking IDs and queue tokens.
+6. Full-slot validation and warnings.
+7. Live queue tracking.
+8. A fully functional procurement staff dashboard.
+9. Time-wise booking statistics.
+10. Farmer management.
+11. Procurement status management.
+12. An administrator dashboard.
+13. Analytics and reports.
+14. Notifications and delay announcements.
+15. Multilingual support.
+16. Persistent database storage.
+17. Secure authentication and role-based permissions.
+18. A responsive design.
+MOST IMPORTANT INSTRUCTION:
+
+Build the actual working application, not just a visual representation of these features.
+
+Do not leave buttons non-functional. Do not hardcode dashboard statistics. Do not simulate successful database operations when no database is connected.
+
+Build and test each module, connect the modules to the same database, and ensure that a booking made by a farmer immediately becomes visible in the staff dashboard and affects the available slot capacity.
+
+The final result should look and behave like a real agricultural procurement technology startup product that can be demonstrated to mentors, evaluators, procurement centre staff and potential investors.
+
+
+
+
+How the finished platform should look
+These are the major screens I want the AI builder to create:
+
+
+
+
+
+
+
+
+
+
+1. Public homepage
+
+Platform introduction, benefits, centre search and login.
+
+
+
+
+
+
+
+
+
+
+
+2. Farmer dashboard
+
+Bookings, tokens, queue and notifications.
+
+
+
+
+
+
+
+
+
+
+
+3. Slot booking
+
+Available, filling-fast and full time slots.
+
+
+
+
+
+
+
+
+
+
+
+4. Live queue
+
+Now serving, farmers ahead and estimated waiting time.
+
+
+
+
+
+
+
+
+
+
+
+5. Staff dashboard
+
+Today's bookings, completed procurement and pending queue.
+
+
+
+
+
+
+
+
+
+
+
+6. Slot management
+
+Every farmer booked in every time slot.
+
+
+One very important thing before building
+Tell Antigravity to use Supabase with PostgreSQL, not just HTML, CSS and JavaScript.
+
+Why? Imagine 10 farmers book the 10:00 AM slot. The 11th farmer must immediately see that the slot is full—even if they are using another phone. That requires a shared database and server-side booking validation.
+
+Also, I recommend building in this order:
+1. Authentication and database.
+2. Farmer registration and booking.
+3. Slot capacity and duplicate prevention.
+4. Staff dashboard and queue management.
+5. Notifications and analytics.
+6. Final visual polish and deployment.
+This will make BhoomiSetu a genuinely demonstrable product, rather than a pretty website with buttons that only look functional.
